@@ -14,6 +14,8 @@ func spawn(p):
 	add_child(bar)
 	bar.global_position = p
 	fishing = true
+	var n = randf_range(10,25)
+	bar.rarity = n
 
 func generate_Random_cat():
 	return cats[randi_range(0,2)]
@@ -21,6 +23,7 @@ func generate_Random_cat():
 func _process(delta: float) -> void:
 	if fishing:
 		if Input.is_action_just_pressed("ui_accept"):
+			fishing = false
 			var catched = bar.catch()
 			if catched:
 				print("you got a %s" % generate_Random_cat())
