@@ -5,19 +5,22 @@ extends Node2D
 @onready var indicator = $Path2D/PathFollow2D/indicator
 @onready var path = $Path2D/PathFollow2D
 
-var rarity = 25
+@export var rarity = 25
 
+var cooldown = 10
 
-func _ready() -> void:
-	area.scale.x = rarity
 
 func _process(delta: float) -> void:
-	move_indicator()
+	area.scale.x = rarity 
+	if !cooldown <= 0:
+		cooldown -= 0.1
+		return
+	move_indicator(delta)
 
-func move_indicator():
+func move_indicator(delta):
 	if path.progress_ratio >= 1:
 		return
-	path.progress_ratio += .01
+	path.progress_ratio += 20/rarity* delta
 
 func catch():
 	var indicator_position = indicator.global_position
