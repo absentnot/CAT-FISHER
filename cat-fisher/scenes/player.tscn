@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://kmf7f5rjffss"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_p0j0m"]
+[ext_resource type="PackedScene" uid="uid://bidubcm44x4jk" path="res://fishing_bar.tscn" id="2_2kfws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4iyd"]
+size = Vector2(56, 88)
+
+[node name="player" type="CharacterBody2D"]
+scale = Vector2(-1, 1)
+script = ExtResource("1_p0j0m")
+fishing_bar = ExtResource("2_2kfws")
+
+[node name="body" type="Polygon2D" parent="."]
+modulate = Color(0.227451, 0.666667, 0.945098, 1)
+position = Vector2(0, 31)
+polygon = PackedVector2Array(-30, -54, -3, 34, 31, -56)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color(1, 1, 0.254902, 1)
+position = Vector2(2, -8)
+invert_border = 0.1
+polygon = PackedVector2Array(17, 15, 30, -30, 86, -58, 88, -52, 34, -22, 23, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 20)
+shape = SubResource("RectangleShape2D_w4iyd")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="a" type="Marker2D" parent="."]
+position = Vector2(89, -61)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

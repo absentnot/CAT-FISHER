@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bidubcm44x4jk"]
+
+[ext_resource type="Script" path="res://fishing_bar.gd" id="1_8evx7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ivfcw"]
+
+[sub_resource type="Curve2D" id="Curve2D_jia0i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 280, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_jnadm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rinkh"]
+
+[node name="fishing_bar" type="Node2D"]
+position = Vector2(100, 109)
+rotation = 1.5708
+script = ExtResource("1_8evx7")
+
+[node name="bar" type="MeshInstance2D" parent="."]
+modulate = Color(1, 0.156863, 0, 1)
+position = Vector2(142, 2)
+scale = Vector2(283.5, 28.36)
+mesh = SubResource("BoxMesh_ivfcw")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jia0i")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+cubic_interp = false
+
+[node name="indicator" type="MeshInstance2D" parent="Path2D/PathFollow2D"]
+position = Vector2(9, 1.94)
+scale = Vector2(19.5, 28.12)
+mesh = SubResource("BoxMesh_jnadm")
+
+[node name="area" type="MeshInstance2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(157, 2)
+scale = Vector2(-10.4027, 28.0946)
+mesh = SubResource("BoxMesh_rinkh")
