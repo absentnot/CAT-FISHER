@@ -1,5 +1,6 @@
 extends Node2D
 signal caught_cat
+signal miss
 
 
 @onready var area = $area
@@ -14,6 +15,7 @@ var reverse = false
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
+		
 		var tw = create_tween()
 		
 		tw.tween_property(indicator, "scale", Vector2(23.0, 34.0)*1.25, 0.1)
@@ -21,6 +23,7 @@ func _process(delta: float) -> void:
 		tw.tween_property(indicator, "scale", Vector2(19.5, 28.12), 0.1)
 		
 		catch()
+	rarity = max(rarity, 20)
 	area.scale.x = rarity 
 	if !cooldown <= 0:
 		cooldown -= 0.1
@@ -44,7 +47,9 @@ func catch():
 	if distance <= rarity:
 		print("CAUGHT")
 		emit_signal("caught_cat")
+		$GPUParticles2D.emitting = true
 		return true
 	else:
 		print("FAILED")
+		emit_signal("miss")
 		return false

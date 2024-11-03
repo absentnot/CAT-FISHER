@@ -14,7 +14,7 @@ noise = SubResource("FastNoiseLite_bgmie")
 
 [resource]
 shader = ExtResource("1_ax208")
-shader_parameter/outline_width = -12.755
+shader_parameter/outline_width = -5.425
 shader_parameter/warp_slow = 2.25
 shader_parameter/outline_color = Color(0.0862745, 0.0745098, 0.141176, 1)
 shader_parameter/noise_scale = 3.68

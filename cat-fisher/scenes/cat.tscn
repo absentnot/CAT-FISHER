@@ -1,9 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://dosdjlkbjxpts"]
+[gd_scene load_steps=13 format=3 uid="uid://dosdjlkbjxpts"]
 
-[ext_resource type="Material" uid="uid://cviupxt3sx4vn" path="res://shaders/buttonOutlineMaterial.tres" id="1_n6s75"]
 [ext_resource type="Script" path="res://scenes/cat.gd" id="1_nqifv"]
+[ext_resource type="Shader" path="res://shaders/cloud_cat.gdshader" id="2_4wf8v"]
 [ext_resource type="Texture2D" uid="uid://vcjigy6wbk7" path="res://assets/cat.png" id="2_tlrea"]
 [ext_resource type="Texture2D" uid="uid://cew6dp4pksi5w" path="res://assets/lying-cat.png" id="4_slrx8"]
+
+[sub_resource type="Gradient" id="Gradient_vf30a"]
+offsets = PackedFloat32Array(0.0327869, 0.516393, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.896909, 0.440678, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tlcku"]
+gradient = SubResource("Gradient_vf30a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bj6mf"]
+shader = ExtResource("2_4wf8v")
+shader_parameter/size_effect = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = true
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 1.0
+shader_parameter/texture_size = Vector2(16, 16)
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_tlcku")
 
 [sub_resource type="Curve" id="Curve_r2vf4"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.746667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -22,17 +40,29 @@ gravity = Vector3(0, 98, 0)
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_5dv62")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qf61"]
+shader = ExtResource("2_4wf8v")
+shader_parameter/size_effect = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 1.0
+shader_parameter/texture_size = Vector2(16, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ud501"]
-size = Vector2(89, 32)
+size = Vector2(69, 10)
 
 [node name="Cat" type="CharacterBody2D"]
-collision_layer = 3
+y_sort_enabled = true
+collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_nqifv")
 
 [node name="Cat" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 3
-material = ExtResource("1_n6s75")
+material = SubResource("ShaderMaterial_bj6mf")
 texture = ExtResource("2_tlrea")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -41,11 +71,13 @@ lifetime = 2.0
 
 [node name="Lying-cat" type="Sprite2D" parent="."]
 visible = false
+y_sort_enabled = true
 texture_filter = 1
+material = SubResource("ShaderMaterial_2qf61")
 position = Vector2(8, -11)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("4_slrx8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.5, -6)
+position = Vector2(0.5, 5)
 shape = SubResource("RectangleShape2D_ud501")

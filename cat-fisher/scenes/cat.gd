@@ -10,15 +10,20 @@ var health = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	var randscale = randf_range(0.5, 1.0)
 	scale = Vector2(randscale, randscale)
-	randscale = randf_range(0.5, 1.5)
+	randscale = randf_range(0.65, 1.2)
 	launch_speed *= randscale
 	randomize_cat_type()
 
 func randomize_cat_type():
 	rarity = randi_range(35, 90)
 	health = rarity % 10
+	modulate = Color(randf(), randf(), randf())
+	if randf() <= 0.9:
+		$Cat.material = null
+		$"Lying-cat".material = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

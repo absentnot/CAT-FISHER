@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv7egdpps62jd"]
+[gd_scene load_steps=6 format=3 uid="uid://dv7egdpps62jd"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ellcy"]
 [ext_resource type="Material" uid="uid://cviupxt3sx4vn" path="res://shaders/buttonOutlineMaterial.tres" id="2_t5ttw"]
 [ext_resource type="Texture2D" uid="uid://csg2hblnxnnlb" path="res://assets/fish.png" id="2_u6xci"]
+[ext_resource type="AudioStream" uid="uid://c7tqxr6bpbin7" path="res://assets/jump.wav" id="4_73qgi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4iyd"]
 size = Vector2(56, 88)
 
 [node name="player" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_ellcy")
 
 [node name="Fish" type="Sprite2D" parent="."]
@@ -45,5 +47,9 @@ one_shot = true
 
 [node name="a" type="Marker2D" parent="."]
 position = Vector2(89, -61)
+
+[node name="JUMP" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_73qgi")
+volume_db = -15.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

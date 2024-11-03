@@ -1,13 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://bub4dav2l7qay"]
+[gd_scene load_steps=33 format=3 uid="uid://bub4dav2l7qay"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_barcl"]
 [ext_resource type="Texture2D" uid="uid://bywf0t445yrhn" path="res://assets/landscape.png" id="1_riy2f"]
 [ext_resource type="PackedScene" uid="uid://dv7egdpps62jd" path="res://scenes/player.tscn" id="1_s8xw2"]
 [ext_resource type="PackedScene" uid="uid://vwo13a31vpju" path="res://scenes/fishing_bar.tscn" id="3_2nun1"]
+[ext_resource type="PackedScene" uid="uid://d2uju56qgb7x7" path="res://scenes/text_juice.tscn" id="3_cjyb0"]
 [ext_resource type="Material" uid="uid://5t01ldahwmsv" path="res://shaders/wobble-wave-mat.tres" id="3_xrukw"]
 [ext_resource type="Texture2D" uid="uid://bm4yt02r3t8b6" path="res://assets/waves.png" id="4_5pwpg"]
 [ext_resource type="Texture2D" uid="uid://nmyikvfnmfvx" path="res://assets/noPad.png" id="5_57aug"]
 [ext_resource type="PackedScene" uid="uid://dosdjlkbjxpts" path="res://scenes/cat.tscn" id="6_8qfe5"]
+[ext_resource type="AudioStream" uid="uid://m6xr4wdbj3n1" path="res://assets/meow 1.ogg" id="10_5lbbp"]
+[ext_resource type="FontFile" uid="uid://bxpihjlvixgc1" path="res://assets/Whacky_Joe_Monospaced.ttf" id="10_knuqf"]
+[ext_resource type="AudioStream" uid="uid://ce0vjmerxuc5o" path="res://assets/purr.ogg" id="11_ega5k"]
+[ext_resource type="AudioStream" uid="uid://dyhi518oe2psr" path="res://assets/fishing.ogg" id="11_ekle8"]
+[ext_resource type="Texture2D" uid="uid://br6fgurrcunm2" path="res://assets/title.png" id="12_8fq13"]
+[ext_resource type="Material" uid="uid://cviupxt3sx4vn" path="res://shaders/buttonOutlineMaterial.tres" id="13_3n76m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_se0bg"]
 size = Vector2(878, 144)
@@ -20,13 +27,54 @@ size = Vector2(165, 659)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bxun"]
 size = Vector2(407.044, 167.412)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ef215"]
+radius = 7.57917
+height = 141.667
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l7670"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(650, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(1, 2, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 175.0
+gravity = Vector3(0, 50, 0)
+scale_min = 1.5
+scale_max = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3v4br"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4w0th"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rlvkw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ii6e5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hkwnt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjcm1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r4g00"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmp85"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s23qm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae1jg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3cj2"]
+
 [node name="scene" type="Node2D"]
+y_sort_enabled = true
 position = Vector2(-55.095, -128.495)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_barcl")
 cats = ExtResource("6_8qfe5")
+text_effect = ExtResource("3_cjyb0")
 
 [node name="fishing_bar" parent="." instance=ExtResource("3_2nun1")]
+visible = false
 z_index = 99
 position = Vector2(955.912, 226.246)
 
@@ -63,16 +111,21 @@ collision_layer = 2
 collision_mask = 3
 
 [node name="CATFLOOR" type="CollisionShape2D" parent="CATSTATICBODY"]
-position = Vector2(119.057, 618.746)
+position = Vector2(119.057, 642.08)
 shape = SubResource("RectangleShape2D_5bxun")
 
 [node name="CATFLOOR2" type="CollisionShape2D" parent="CATSTATICBODY"]
-position = Vector2(523.412, 590.412)
+position = Vector2(526.745, 592.912)
 shape = SubResource("RectangleShape2D_5bxun")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CATSTATICBODY"]
 position = Vector2(-56.5875, 272.412)
 shape = SubResource("RectangleShape2D_2i1jc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CATSTATICBODY"]
+position = Vector2(43.4125, 403.746)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ef215")
 
 [node name="Landscape" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
@@ -80,7 +133,6 @@ texture = ExtResource("1_riy2f")
 offset = Vector2(960, 540)
 
 [node name="player" parent="." instance=ExtResource("1_s8xw2")]
-z_index = 5
 position = Vector2(313.412, 442.079)
 
 [node name="Waves" type="Sprite2D" parent="."]
@@ -89,3 +141,75 @@ material = ExtResource("3_xrukw")
 scale = Vector2(-0.6, 0.6)
 texture = ExtResource("4_5pwpg")
 offset = Vector2(-960, 540)
+
+[node name="CATCH" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_5lbbp")
+volume_db = -10.0
+pitch_scale = 1.2
+
+[node name="PURR" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ega5k")
+volume_db = -15.0
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ekle8")
+autoplay = true
+
+[node name="SeaBreeze" type="GPUParticles2D" parent="."]
+position = Vector2(560.079, 73.7458)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_l7670")
+lifetime = 4.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("10_knuqf")
+bbcode_enabled = true
+text = "[center]CATS: 10"
+
+[node name="TITLE" type="CanvasLayer" parent="."]
+
+[node name="TITLE" type="TextureRect" parent="TITLE"]
+texture_filter = 1
+offset_left = 538.0
+offset_top = 58.0
+offset_right = 1038.0
+offset_bottom = 558.0
+texture = ExtResource("12_8fq13")
+
+[node name="START" type="Button" parent="TITLE"]
+texture_filter = 1
+material = ExtResource("13_3n76m")
+offset_left = 724.0
+offset_top = 456.0
+offset_right = 854.0
+offset_bottom = 500.0
+theme_override_colors/font_hover_color = Color(0.728821, 0.728822, 0.728822, 1)
+theme_override_fonts/font = ExtResource("10_knuqf")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3v4br")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_4w0th")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rlvkw")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_ii6e5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_hkwnt")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_rjcm1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_r4g00")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mmp85")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s23qm")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ae1jg")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d3cj2")
+text = "START"
+
+[connection signal="pressed" from="TITLE/START" to="." method="_on_start_pressed"]

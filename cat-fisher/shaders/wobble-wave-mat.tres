@@ -11,7 +11,7 @@ noise = SubResource("FastNoiseLite_m763u")
 
 [resource]
 shader = ExtResource("1_fi7yy")
-shader_parameter/strength = 0.01
+shader_parameter/strength = 0.02
 shader_parameter/speed = 2.0
 shader_parameter/flowing = true
 shader_parameter/frames = 10
