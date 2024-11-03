@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cviupxt3sx4vn"]
+
+[ext_resource type="Shader" uid="uid://bq76ng3l0yox6" path="res://shaders/OutlineShader.tres" id="1_ax208"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bgmie"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ddhh"]
+width = 50
+height = 50
+seamless = true
+seamless_blend_skirt = 1.0
+normalize = false
+noise = SubResource("FastNoiseLite_bgmie")
+
+[resource]
+shader = ExtResource("1_ax208")
+shader_parameter/outline_width = -12.755
+shader_parameter/warp_slow = 2.25
+shader_parameter/outline_color = Color(0.0862745, 0.0745098, 0.141176, 1)
+shader_parameter/noise_scale = 3.68
+shader_parameter/noiseOffset = 0.0
+shader_parameter/outline_scale = 0.2
+shader_parameter/noise = SubResource("NoiseTexture2D_8ddhh")

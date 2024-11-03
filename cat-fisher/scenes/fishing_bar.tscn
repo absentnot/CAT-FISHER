@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bidubcm44x4jk"]
+[gd_scene load_steps=6 format=3 uid="uid://vwo13a31vpju"]
 
-[ext_resource type="Script" path="res://fishing_bar.gd" id="1_8evx7"]
+[ext_resource type="Script" path="res://scripts/fishing_bar.gd" id="1_2hdua"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ivfcw"]
 
@@ -17,10 +17,15 @@ point_count = 2
 [node name="fishing_bar" type="Node2D"]
 position = Vector2(100, 109)
 rotation = 1.5708
-script = ExtResource("1_8evx7")
+script = ExtResource("1_2hdua")
+
+[node name="bar2" type="MeshInstance2D" parent="."]
+position = Vector2(141.703, 2.01754)
+scale = Vector2(290.594, 35.6462)
+mesh = SubResource("BoxMesh_ivfcw")
 
 [node name="bar" type="MeshInstance2D" parent="."]
-modulate = Color(1, 0.156863, 0, 1)
+modulate = Color(0.0862745, 0.0745098, 0.129412, 1)
 position = Vector2(142, 2)
 scale = Vector2(283.5, 28.36)
 mesh = SubResource("BoxMesh_ivfcw")
@@ -37,7 +42,7 @@ scale = Vector2(19.5, 28.12)
 mesh = SubResource("BoxMesh_jnadm")
 
 [node name="area" type="MeshInstance2D" parent="."]
-modulate = Color(0, 1, 0, 1)
+modulate = Color(0.14902, 0.313726, 0.482353, 1)
 position = Vector2(157, 2)
 scale = Vector2(-10.4027, 28.0946)
 mesh = SubResource("BoxMesh_rinkh")

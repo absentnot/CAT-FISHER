@@ -1,22 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://kmf7f5rjffss"]
+[gd_scene load_steps=5 format=3 uid="uid://dv7egdpps62jd"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_p0j0m"]
-[ext_resource type="PackedScene" uid="uid://bidubcm44x4jk" path="res://fishing_bar.tscn" id="2_2kfws"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_ellcy"]
+[ext_resource type="Material" uid="uid://cviupxt3sx4vn" path="res://shaders/buttonOutlineMaterial.tres" id="2_t5ttw"]
+[ext_resource type="Texture2D" uid="uid://csg2hblnxnnlb" path="res://assets/fish.png" id="2_u6xci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4iyd"]
 size = Vector2(56, 88)
 
 [node name="player" type="CharacterBody2D"]
-scale = Vector2(-1, 1)
-script = ExtResource("1_p0j0m")
-fishing_bar = ExtResource("2_2kfws")
+script = ExtResource("1_ellcy")
+
+[node name="Fish" type="Sprite2D" parent="."]
+texture_filter = 3
+material = ExtResource("2_t5ttw")
+position = Vector2(9, -42)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("2_u6xci")
+offset = Vector2(-50, -50)
 
 [node name="body" type="Polygon2D" parent="."]
+visible = false
 modulate = Color(0.227451, 0.666667, 0.945098, 1)
 position = Vector2(0, 31)
 polygon = PackedVector2Array(-30, -54, -3, 34, 31, -56)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 modulate = Color(1, 1, 0.254902, 1)
 position = Vector2(2, -8)
 invert_border = 0.1

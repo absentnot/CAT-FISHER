@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://5t01ldahwmsv"]
+
+[ext_resource type="Shader" path="res://shaders/wobble.gdshader" id="1_fi7yy"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m763u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_io15g"]
+width = 100
+height = 100
+noise = SubResource("FastNoiseLite_m763u")
+
+[resource]
+shader = ExtResource("1_fi7yy")
+shader_parameter/strength = 0.01
+shader_parameter/speed = 2.0
+shader_parameter/flowing = true
+shader_parameter/frames = 10
+shader_parameter/flowMap = SubResource("NoiseTexture2D_io15g")

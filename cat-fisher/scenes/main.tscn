@@ -1,26 +1,91 @@
-[gd_scene load_steps=4 format=3 uid="uid://cayojxjx6g2vx"]
+[gd_scene load_steps=13 format=3 uid="uid://bub4dav2l7qay"]
 
-[ext_resource type="PackedScene" uid="uid://kmf7f5rjffss" path="res://player.tscn" id="1_w3jnd"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ut56g"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_barcl"]
+[ext_resource type="Texture2D" uid="uid://bywf0t445yrhn" path="res://assets/landscape.png" id="1_riy2f"]
+[ext_resource type="PackedScene" uid="uid://dv7egdpps62jd" path="res://scenes/player.tscn" id="1_s8xw2"]
+[ext_resource type="PackedScene" uid="uid://vwo13a31vpju" path="res://scenes/fishing_bar.tscn" id="3_2nun1"]
+[ext_resource type="Material" uid="uid://5t01ldahwmsv" path="res://shaders/wobble-wave-mat.tres" id="3_xrukw"]
+[ext_resource type="Texture2D" uid="uid://bm4yt02r3t8b6" path="res://assets/waves.png" id="4_5pwpg"]
+[ext_resource type="Texture2D" uid="uid://nmyikvfnmfvx" path="res://assets/noPad.png" id="5_57aug"]
+[ext_resource type="PackedScene" uid="uid://dosdjlkbjxpts" path="res://scenes/cat.tscn" id="6_8qfe5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_se0bg"]
 size = Vector2(878, 144)
 
-[node name="scene" type="Node2D"]
+[sub_resource type="BoxMesh" id="BoxMesh_ut56g"]
 
-[node name="player" parent="." instance=ExtResource("1_w3jnd")]
-position = Vector2(362, 66)
-scale = Vector2(1, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2i1jc"]
+size = Vector2(165, 659)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bxun"]
+size = Vector2(407.044, 167.412)
+
+[node name="scene" type="Node2D"]
+position = Vector2(-55.095, -128.495)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_barcl")
+cats = ExtResource("6_8qfe5")
+
+[node name="fishing_bar" parent="." instance=ExtResource("3_2nun1")]
+z_index = 99
+position = Vector2(955.912, 226.246)
+
+[node name="NoPad" type="Sprite2D" parent="."]
+modulate = Color(0.1392, 0.38164, 0.58, 1)
+z_index = -3
+position = Vector2(587, 334)
+scale = Vector2(37.5, 21.6875)
+texture = ExtResource("5_57aug")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(453, 233)
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
-position = Vector2(2.49998, 72.25)
-scale = Vector2(877, 145.5)
-mesh = SubResource("BoxMesh_ut56g")
+position = Vector2(435, 503)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2, 75)
 shape = SubResource("RectangleShape2D_se0bg")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-236.5, 72.25)
+scale = Vector2(399, 145.5)
+mesh = SubResource("BoxMesh_ut56g")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(46, -88)
+shape = SubResource("RectangleShape2D_2i1jc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-492.421, -181.088)
+shape = SubResource("RectangleShape2D_2i1jc")
+
+[node name="CATSTATICBODY" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CATFLOOR" type="CollisionShape2D" parent="CATSTATICBODY"]
+position = Vector2(119.057, 618.746)
+shape = SubResource("RectangleShape2D_5bxun")
+
+[node name="CATFLOOR2" type="CollisionShape2D" parent="CATSTATICBODY"]
+position = Vector2(523.412, 590.412)
+shape = SubResource("RectangleShape2D_5bxun")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CATSTATICBODY"]
+position = Vector2(-56.5875, 272.412)
+shape = SubResource("RectangleShape2D_2i1jc")
+
+[node name="Landscape" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_riy2f")
+offset = Vector2(960, 540)
+
+[node name="player" parent="." instance=ExtResource("1_s8xw2")]
+z_index = 5
+position = Vector2(313.412, 442.079)
+
+[node name="Waves" type="Sprite2D" parent="."]
+z_index = -1
+material = ExtResource("3_xrukw")
+scale = Vector2(-0.6, 0.6)
+texture = ExtResource("4_5pwpg")
+offset = Vector2(-960, 540)
